@@ -12,7 +12,7 @@ public class FirstTest extends BaseTest {
     public void basicFirefoxTest() {
         setDriverToFirefox();
         MainPage.GoTo();         // Not implemented yet
-        driver.get(baseUrl);
+        driver.navigate().to(baseUrl);
         assertThat(driver.getTitle()).isEqualToIgnoringCase("The Internet");
         driver.close();
     }
@@ -20,7 +20,7 @@ public class FirstTest extends BaseTest {
     @Test
     public void basicMarionetteTest() {
         setDriverToMarionette();
-        driver.get(baseUrl);
+        driver.navigate().to(baseUrl);
         assertThat(driver.getTitle()).isEqualToIgnoringCase("The Internet");
         driver.close();
     }
@@ -28,7 +28,7 @@ public class FirstTest extends BaseTest {
     @Test
     public void basicChromeTest() {
         setDriverToChrome();
-        driver.get(baseUrl);
+        driver.navigate().to(baseUrl);
         assertThat(driver.getTitle()).isEqualToIgnoringCase("The Internet");
         driver.close();
     }

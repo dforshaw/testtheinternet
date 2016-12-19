@@ -6,9 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class BaseTest {
-
-    public static String baseUrl = "http://the-internet.herokuapp.com/";
+public class BaseTest implements Config {
 
     private final String os = System.getProperty("os.name").toUpperCase();
     private String driverPath = "";
