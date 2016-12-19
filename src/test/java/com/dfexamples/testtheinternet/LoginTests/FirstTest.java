@@ -32,4 +32,12 @@ public class FirstTest extends BaseTest {
         assertThat(driver.getTitle()).isEqualToIgnoringCase("The Internet");
         driver.close();
     }
+
+    @Test
+    public void getSystemProperties() {
+        String os = System.getProperty("os.name").toUpperCase();
+        System.out.println("Current Operating System: " + os);
+        String sysArch = System.getProperty("os.arch").toUpperCase();
+        System.out.println("Current System Architecture: " + sysArch);
+    }
 }
