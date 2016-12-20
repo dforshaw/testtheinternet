@@ -7,7 +7,7 @@ public interface Config {
 
 //    public static String browserType = BROWSER_MARIONETTE;
 //    public static String browserType = BROWSER_FIREFOX;
-    public static String browserType = BROWSER_CHROME;
+//    public static String browserType = BROWSER_CHROME;
 
-//    final String browserType=System.getProperty("browserType");
+    final String browserType=System.getProperty("browserType");
 }

@@ -57,8 +57,7 @@ public class Driver {
 
     private static void setDriverToChrome(String os) {
         String driverPath = "";
-        System.out.println(os);
-        if (os == "MAC OS X")           driverPath = "/chromedriver/chromedriver";
+        if (os == "Mac OS X")           driverPath = "/chromedriver/chromedriver";
         else if (os == "WINDOWS 10")    driverPath = "/chromedriver/chromedriver.exe";
         else                            driverPath = "/chromedriver/chromedriver";
 
