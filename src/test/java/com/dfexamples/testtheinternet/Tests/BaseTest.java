@@ -1,6 +1,6 @@
 package com.dfexamples.testtheinternet.Tests;
 
-import com.dfexamples.testtheinternet.Framework.Driver;
+import com.dfexamples.testtheinternet.Framework.DriverManager;
 import org.junit.After;
 import org.junit.Before;
 
@@ -8,12 +8,12 @@ public class BaseTest implements Config {
 
     @Before
     public void setUp() {
-        Driver.Initialize(browserType);
+        DriverManager.Initialize(browserType);
     }
 
     @After
     public void tearDown() {
-        Driver.Close();
-        Driver.Quit();
+        DriverManager.Close();
+        DriverManager.Quit();
     }
 }

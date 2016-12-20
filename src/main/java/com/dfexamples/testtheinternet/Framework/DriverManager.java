@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class Driver {
+public class DriverManager {
 
-    public static WebDriver Instance;
+    public static WebDriver DriverInstance;
     public static String BaseAddress = "http://the-internet.herokuapp.com/";
     public static String OperatingSystem = System.getProperty("os.name").toUpperCase();
     public static String UserHomeDir = System.getProperty("user.home");
@@ -28,7 +28,7 @@ public class Driver {
     public static void Initialize(String browsername) {
         switch (browsername) {
             case "":
-                Instance = new FirefoxDriver();
+                DriverInstance = new FirefoxDriver();
                 break;
 
             case "Firefox":
@@ -44,13 +44,13 @@ public class Driver {
                 break;
         }
 
-        Instance.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        DriverInstance.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     private static void setDriverToFirefox() {
         String fireFoxDriverLocation = Webdriver_Clients + setDriverPathForFirefox(OperatingSystem);
         System.setProperty("webdriver.gecko.driver", fireFoxDriverLocation);
-        Instance = new FirefoxDriver();
+        DriverInstance = new FirefoxDriver();
     }
 
     private static String setDriverPathForFirefox(String os) {
@@ -64,7 +64,7 @@ public class Driver {
         capabilities.setCapability("marionette", true);
         String marionetteDriverLocation = Webdriver_Clients + setDriverPathForMarionette(OperatingSystem);
         System.setProperty("webdriver.gecko.driver", marionetteDriverLocation);
-        Instance = new FirefoxDriver(capabilities);
+        DriverInstance = new FirefoxDriver(capabilities);
     }
 
     private static String setDriverPathForMarionette(String os) {
@@ -76,7 +76,7 @@ public class Driver {
     private static void setDriverToChrome() {
         String chromeDriverLocation = Webdriver_Clients + setDriverPathForChrome(OperatingSystem);
         System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
-        Instance = new ChromeDriver();
+        DriverInstance = new ChromeDriver();
     }
 
     private static String setDriverPathForChrome(String os) {
@@ -87,12 +87,12 @@ public class Driver {
 
     public static void Close() {
 
-        Instance.close();
+        DriverInstance.close();
     }
 
     public static void Quit() {
 
-        Instance.quit();
+        DriverInstance.quit();
     }
 
     public static String getBaseAddress() {
@@ -101,14 +101,14 @@ public class Driver {
 
     public static void waitForClickable(By locator, int timeUnit) {
 
-        WebDriverWait wait = new WebDriverWait(Driver.Instance,timeUnit);
+        WebDriverWait wait = new WebDriverWait(DriverManager.DriverInstance,timeUnit);
 
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public static void waitForVisible(By locator, int timeUnit) {
 
-        WebDriverWait wait = new WebDriverWait(Driver.Instance,timeUnit);
+        WebDriverWait wait = new WebDriverWait(DriverManager.DriverInstance,timeUnit);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
