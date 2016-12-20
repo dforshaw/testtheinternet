@@ -18,6 +18,12 @@ public class Driver {
     public static String UserHomeDir = System.getProperty("user.home");
     public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
     public static String Webdriver_Clients = ProjHomeDir + "/vendors";
+    public static String FirefoxDriverPathForMac = "/geckodriver/geckodriver";
+    public static String FirefoxDriverPathForWindows10 = "/geckodriver/geckodriver";
+    public static String MarionetteDriverPathForMac = "/geckodriver/geckodriver";
+    public static String MarionetteDriverPathForWindows10 = "/geckodriver/geckodriver";
+    public static String ChromeDriverPathForMac = "/chromedriver/chromedriver";
+    public static String ChromeDriverPathForWindows10 = "/chromedriver/chromedriver.exe";
 
     public static void Initialize(String browsername) {
         switch (browsername) {
@@ -34,7 +40,7 @@ public class Driver {
                 break;
 
             case "Chrome":
-                setDriverToChrome(OperatingSystem);
+                setDriverToChrome();
                 break;
         }
 
@@ -42,28 +48,41 @@ public class Driver {
     }
 
     private static void setDriverToFirefox() {
-        String fireFoxDriverLocation = Webdriver_Clients + "/geckodriver/geckodriver";
+        String fireFoxDriverLocation = Webdriver_Clients + setDriverPathForFirefox(OperatingSystem);
         System.setProperty("webdriver.gecko.driver", fireFoxDriverLocation);
         Instance = new FirefoxDriver();
+    }
+
+    private static String setDriverPathForFirefox(String os) {
+        if (os == "Mac OS X")           return FirefoxDriverPathForMac;
+        else if (os == "WINDOWS 10")    return FirefoxDriverPathForWindows10;
+        else                            return FirefoxDriverPathForMac;
     }
 
     private static void setDriverToMarionette() {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
-        String marionetteDriverLocation = Webdriver_Clients + "/geckodriver/geckodriver";
+        String marionetteDriverLocation = Webdriver_Clients + setDriverPathForMarionette(OperatingSystem);
         System.setProperty("webdriver.gecko.driver", marionetteDriverLocation);
         Instance = new FirefoxDriver(capabilities);
     }
 
-    private static void setDriverToChrome(String os) {
-        String driverPath = "";
-        if (os == "Mac OS X")           driverPath = "/chromedriver/chromedriver";
-        else if (os == "WINDOWS 10")    driverPath = "/chromedriver/chromedriver.exe";
-        else                            driverPath = "/chromedriver/chromedriver";
+    private static String setDriverPathForMarionette(String os) {
+        if (os == "Mac OS X")           return MarionetteDriverPathForMac;
+        else if (os == "WINDOWS 10")    return MarionetteDriverPathForWindows10;
+        else                            return MarionetteDriverPathForMac;
+    }
 
-        String chromeDriverLocation = Webdriver_Clients + driverPath;
+    private static void setDriverToChrome() {
+        String chromeDriverLocation = Webdriver_Clients + setDriverPathForChrome(OperatingSystem);
         System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
         Instance = new ChromeDriver();
+    }
+
+    private static String setDriverPathForChrome(String os) {
+        if (os == "Mac OS X")           return ChromeDriverPathForMac;
+        else if (os == "WINDOWS 10")    return ChromeDriverPathForWindows10;
+        else                            return ChromeDriverPathForMac;
     }
 
     public static void Close() {
