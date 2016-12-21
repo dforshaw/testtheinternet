@@ -28,7 +28,7 @@ public class Props {
         String os;
 
         host = Optional.ofNullable(System.getProperty("targetHost")).orElse(DEFAULT_HOST);
-        browser = Optional.ofNullable(System.getProperty("targetBrowser")).orElse(DEFAULT_BROWSER);
+        browser = Optional.ofNullable(System.getProperty("browserType")).orElse(DEFAULT_BROWSER);
         os = System.getProperty("os.name").toUpperCase();
 
         try {
