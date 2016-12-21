@@ -1,5 +1,6 @@
 package com.dfexamples.testtheinternet.Framework;
 
+import com.dfexamples.testtheinternet.Framework.Utilities.Props;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 public class DriverManager {
 
     public static WebDriver DriverInstance;
-    public static String BaseAddress = "http://the-internet.herokuapp.com/";
-    public static String OperatingSystem = System.getProperty("os.name").toUpperCase();
+    public static String BaseAddress = Props.getProperty("base_address");
+    public static String OperatingSystem = Props.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
     public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
     public static String Webdriver_Clients = ProjHomeDir + "/vendors";
@@ -25,7 +26,11 @@ public class DriverManager {
     public static String ChromeDriverPathForMac = "/chromedriver/chromedriver";
     public static String ChromeDriverPathForWindows10 = "/chromedriver/chromedriver.exe";
 
-    public static void Initialize(String browsername) {
+    public static void Initialize() {
+        String browsername = Props.getProperty("SelectedBrowser");
+
+        if (browsername.isEmpty())
+            browsername = System.getProperty("browserType");
 
         switch (browsername) {
             case "":

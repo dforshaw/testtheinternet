@@ -4,11 +4,11 @@ import com.dfexamples.testtheinternet.Framework.DriverManager;
 import org.junit.After;
 import org.junit.Before;
 
-public class BaseTest implements Config {
+public class BaseTest {
 
     @Before
     public void setUp() {
-        DriverManager.Initialize(browserType);
+        DriverManager.Initialize();
     }
 
     @After
