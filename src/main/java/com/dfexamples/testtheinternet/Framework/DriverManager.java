@@ -18,7 +18,7 @@ public class DriverManager {
     public static String OperatingSystem = Props.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
     public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
-    public static String Webdriver_Clients = ProjHomeDir + "/vendors";
+    public static String BrowserDriverVendorDir = ProjHomeDir + "/vendors";
     public static String FirefoxDriverPathForMac = "/geckodriver/geckodriver";
     public static String FirefoxDriverPathForWindows10 = "/geckodriver/geckodriver.exe";
     public static String MarionetteDriverPathForMac = "/geckodriver/geckodriver";
@@ -32,59 +32,65 @@ public class DriverManager {
         if (browsername.isEmpty())
             browsername = System.getProperty("browserType");
 
-        switch (browsername) {
-            case "":
-                DriverInstance = new FirefoxDriver();
-                break;
-
-            case "Firefox":
-                System.setProperty("webdriver.gecko.driver",
-                        Webdriver_Clients + getDriverPath("Firefox", OperatingSystem));
-                DriverInstance = new FirefoxDriver();
-                break;
-
-            case "Marionette":
-                DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-                capabilities.setCapability("marionette", true);
-                System.setProperty("webdriver.gecko.driver",
-                        Webdriver_Clients + getDriverPath("Marionette", OperatingSystem));
-                DriverInstance = new FirefoxDriver(capabilities);
-                break;
-
-            case "Chrome":
-                System.setProperty("webdriver.chrome.driver",
-                        Webdriver_Clients + getDriverPath("Chrome", OperatingSystem));
-                DriverInstance = new ChromeDriver();
-                break;
-        }
-
+        setUpDriverInstance(browsername);
         DriverInstance.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    private static String getDriverPath(String browsername, String operatingSystem) {
+    private static void setUpDriverInstance(String browsername) {
+        switch (browsername) {
+            case "Chrome":
+                setUpDriverInstanceUsingChrome();
+                break;
 
-        String path ="";
+            case "Firefox":
+                setUpDriverInstanceUsingFirefox();
+                break;
 
-        if (browsername.equalsIgnoreCase("Firefox")) {
-            if (operatingSystem.equalsIgnoreCase("mac os x"))
-                path = FirefoxDriverPathForMac;
-            else if (operatingSystem.equalsIgnoreCase("windows 10"))
-                path = FirefoxDriverPathForWindows10;
+            case "Marionette":
+                setUpDriverInstanceUsingmMarionette();
+                break;
+
+            default:
+                setUpDriverInstanceUsingChrome();
+                break;
+        }
+    }
+
+    private static void setUpDriverInstanceUsingChrome() {
+        System.setProperty("webdriver.chrome.driver",setPathForThirdPartyBrowserDriver("Chrome"));
+        DriverInstance = new ChromeDriver();
+    }
+
+    private static void setUpDriverInstanceUsingFirefox() {
+        System.setProperty("webdriver.gecko.driver",setPathForThirdPartyBrowserDriver("Firefox"));
+        DriverInstance = new FirefoxDriver();
+    }
+
+    private static void setUpDriverInstanceUsingmMarionette() {
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette", true);
+        System.setProperty("webdriver.gecko.driver",setPathForThirdPartyBrowserDriver("Marionette"));
+        DriverInstance = new FirefoxDriver(capabilities);
+    }
+
+    private static String setPathForThirdPartyBrowserDriver(String browsername) {
+
+        String thirdPartyBrowserDriverPath ="";
+
+        if (browsername.equalsIgnoreCase("Chrome")) {
+            thirdPartyBrowserDriverPath = (OperatingSystem.equalsIgnoreCase("mac os x"))
+                    ? ChromeDriverPathForMac : ChromeDriverPathForWindows10;
+        }
+        else if (browsername.equalsIgnoreCase("Firefox")) {
+            thirdPartyBrowserDriverPath = (OperatingSystem.equalsIgnoreCase("mac os x"))
+                    ? FirefoxDriverPathForMac : FirefoxDriverPathForWindows10;
         }
         else if (browsername.equalsIgnoreCase("Marionette")) {
-            if (operatingSystem.equalsIgnoreCase("mac os x"))
-                path = MarionetteDriverPathForMac;
-            else if (operatingSystem.equalsIgnoreCase("windows 10"))
-                path = MarionetteDriverPathForWindows10;
-        }
-        else if (browsername.equalsIgnoreCase("Chrome")) {
-            if (operatingSystem.equalsIgnoreCase("mac os x"))
-                path = ChromeDriverPathForMac;
-            else if (operatingSystem.equalsIgnoreCase("windows 10"))
-                path = ChromeDriverPathForWindows10;
+            thirdPartyBrowserDriverPath = (OperatingSystem.equalsIgnoreCase("mac os x"))
+                    ? MarionetteDriverPathForMac : MarionetteDriverPathForWindows10;
         }
 
-        return path;
+        return BrowserDriverVendorDir + thirdPartyBrowserDriverPath;
     }
 
     public static void Close() {
