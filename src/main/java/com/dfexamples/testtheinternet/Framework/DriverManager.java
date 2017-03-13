@@ -17,8 +17,8 @@ public class DriverManager {
     public static String BaseAddress = Props.getProperty("base_address");
     public static String OperatingSystem = Props.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
-    public static String ProjHomeDir = UserHomeDir + "/Code/testtheinternet";
-//    public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
+//    public static String ProjHomeDir = UserHomeDir + "/Code/testtheinternet";
+    public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
     public static String BrowserDriverVendorDir = ProjHomeDir + "/vendors";
     public static String FirefoxDriverPathForMac = "/geckodriver/geckodriver";
     public static String FirefoxDriverPathForWindows = "/geckodriver/geckodriver.exe";

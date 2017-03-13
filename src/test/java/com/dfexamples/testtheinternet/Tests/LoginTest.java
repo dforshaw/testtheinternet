@@ -2,7 +2,10 @@ package com.dfexamples.testtheinternet.Tests;
 
 import com.dfexamples.testtheinternet.Framework.Pages.LoginPage;
 import com.dfexamples.testtheinternet.Framework.Pages.SecureLoggedInPage;
+import com.dfexamples.testtheinternet.Framework.Utilities.Capture;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -29,9 +32,17 @@ public class LoginTest extends BaseTest {
 
         LoginPage.LoginAs("tomsmith").WithPassword("badpassword").Login();
 
-        assertThat("Received error message from bad password",
-                LoginPage.getErrorMsg(),
-                startsWith("Your password is invalid!"));
+        try {
+            assertThat("Received error message from bad password",
+                    LoginPage.getErrorMsg(),
+                    startsWith("Your password is invalid!"));
+        } finally {
+            try {
+                Capture.TakeScreenshot("LoginPage");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Test
@@ -41,8 +52,16 @@ public class LoginTest extends BaseTest {
 
         LoginPage.LoginAs("baduser").WithPassword("SuperSecretPassword!").Login();
 
+        try {
         assertThat("Received error message from bad password",
                 LoginPage.getErrorMsg(),
                 startsWith("Your username is invalid!"));
+        } finally {
+            try {
+                Capture.TakeScreenshot("LoginPage");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
