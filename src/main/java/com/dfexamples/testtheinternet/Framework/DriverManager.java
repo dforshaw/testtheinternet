@@ -1,6 +1,5 @@
 package com.dfexamples.testtheinternet.Framework;
 
-import com.dfexamples.testtheinternet.Framework.Utilities.Props;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,11 +13,11 @@ import java.util.concurrent.TimeUnit;
 public class DriverManager {
 
     public static WebDriver DriverInstance;
-    public static String BaseAddress = Props.getProperty("base_address");
-    public static String OperatingSystem = Props.getProperty("operating_system");
+    public static String BaseAddress = PropertyManager.getProperty("base_address");
+    public static String OperatingSystem = PropertyManager.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
-//    public static String ProjHomeDir = UserHomeDir + "/Code/testtheinternet";
-    public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
+    public static String ProjHomeDir = UserHomeDir + "/Code/testtheinternet";
+//    public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
     public static String BrowserDriverVendorDir = ProjHomeDir + "/vendors";
     public static String FirefoxDriverPathForMac = "/geckodriver/geckodriver";
     public static String FirefoxDriverPathForWindows = "/geckodriver/geckodriver.exe";
@@ -28,7 +27,7 @@ public class DriverManager {
     public static String ChromeDriverPathForWindows = "/chromedriver/chromedriver.exe";
 
     public static void Initialize() {
-        String browsername = Props.getProperty("SelectedBrowser");
+        String browsername = PropertyManager.getProperty("SelectedBrowser");
 
         if (browsername.isEmpty())
             browsername = System.getProperty("browserType");
