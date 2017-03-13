@@ -8,7 +8,7 @@ public class LoginCommand {
 
     private static By usernameField = By.id("username");
     private static By passwordField = By.id("password");
-    private static By loginButtonSelector = By.cssSelector(".fa-sign-in");
+    private static By loginButtonSelector = By.cssSelector("button[type='submit']");
 
     private String userNameToUse;
     private String passwordToUse;
