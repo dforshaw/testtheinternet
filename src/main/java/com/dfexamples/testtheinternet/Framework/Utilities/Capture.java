@@ -61,7 +61,7 @@ public class Capture {
     private static File createATempDirectoryForScreenshots(String testSet) {
         String s = File.separator;
         String ourTestTempPathName = System.getProperty("user.dir") +
-                String.format("%ssrc%stest%sresources%stemp%sscreenshots%s"+testSet,s,s,s,s,s,s);
+                String.format("%ssrc%stest%sResources%sScreenshots%s"+testSet,s,s,s,s,s,s);
 
         File testTempDir = new File(ourTestTempPathName);
         if(testTempDir.exists()){
