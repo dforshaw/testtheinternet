@@ -10,21 +10,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_CHROME;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_GECKO;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROJ_LOCATION_HOME;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.VENDOR_PATH;
+
 public class DriverManager {
 
     public static WebDriver DriverInstance;
     public static String BaseAddress = PropertyManager.getProperty("base_address");
     public static String OperatingSystem = PropertyManager.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
-    public static String ProjHomeDir = UserHomeDir + "/Code/testtheinternet";
-//    public static String ProjHomeDir = UserHomeDir + "/Ideaprojects/testtheinternet";
-    public static String BrowserDriverVendorDir = ProjHomeDir + "/vendors";
-    public static String FirefoxDriverPathForMac = "/geckodriver/geckodriver";
-    public static String FirefoxDriverPathForWindows = "/geckodriver/geckodriver.exe";
-    public static String MarionetteDriverPathForMac = "/geckodriver/geckodriver";
-    public static String MarionetteDriverPathForWindows = "/geckodriver/geckodriver.exe";
-    public static String ChromeDriverPathForMac = "/chromedriver/chromedriver";
-    public static String ChromeDriverPathForWindows = "/chromedriver/chromedriver.exe";
+    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_HOME.getPath() + "/testtheinternet";
+//    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_WORK.getPath() + "/testtheinternet";
+    public static String BrowserDriverVendorDir = ProjHomeDir + VENDOR_PATH.getPath();
 
     public static void Initialize() {
         String browsername = PropertyManager.getProperty("SelectedBrowser");
@@ -75,23 +74,24 @@ public class DriverManager {
     }
 
     private static String usingPathForThirdPartyBrowserDriverByOS(String browsername) {
+
+        String path;
+
         switch (browsername) {
             case "Chrome":
-                return (OperatingSystem.equalsIgnoreCase("mac os x"))
-                        ? ChromeDriverPathForMac : ChromeDriverPathForWindows;
+                path = DRIVER_PATH_CHROME.getPath();
 
             case "Firefox":
-                return (OperatingSystem.equalsIgnoreCase("mac os x"))
-                        ? FirefoxDriverPathForMac : FirefoxDriverPathForWindows;
+                path = DRIVER_PATH_GECKO.getPath();
 
             case "Marionette":
-                return (OperatingSystem.equalsIgnoreCase("mac os x"))
-                        ? MarionetteDriverPathForMac : MarionetteDriverPathForWindows;
+                path = DRIVER_PATH_GECKO.getPath();
 
             default:
-                return (OperatingSystem.equalsIgnoreCase("mac os x"))
-                        ? ChromeDriverPathForMac : ChromeDriverPathForWindows;
+                path = DRIVER_PATH_CHROME.getPath();
         }
+
+        return (OperatingSystem.equalsIgnoreCase("mac os x") ? path : path + ".exe");
     }
 
     public static void Close() {

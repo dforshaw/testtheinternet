@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static com.dfexamples.testtheinternet.Framework.Enums.TestUser.USER_W_BAD_LOGIN;
+import static com.dfexamples.testtheinternet.Framework.Enums.TestUser.USER_W_BAD_PWD;
+import static com.dfexamples.testtheinternet.Framework.Enums.TestUser.USER_W_GOOD_INFO;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
@@ -18,7 +21,7 @@ public class LoginTest extends BaseTest {
 
         LoginPage.GoTo();
 
-        LoginPage.LoginAs("tomsmith").WithPassword("SuperSecretPassword!").Login();
+        LoginPage.LoginAs(USER_W_GOOD_INFO.getUsername()).WithPassword(USER_W_GOOD_INFO.getPassword()).Login();
 
         assertThat("Failed to login",
                 SecureLoggedInPage.IsAt(),
@@ -30,7 +33,7 @@ public class LoginTest extends BaseTest {
 
         LoginPage.GoTo();
 
-        LoginPage.LoginAs("tomsmith").WithPassword("badpassword").Login();
+        LoginPage.LoginAs(USER_W_BAD_PWD.getUsername()).WithPassword(USER_W_BAD_PWD.getPassword()).Login();
 
         try {
             assertThat("Received error message from bad password",
@@ -50,7 +53,7 @@ public class LoginTest extends BaseTest {
 
         LoginPage.GoTo();
 
-        LoginPage.LoginAs("baduser").WithPassword("SuperSecretPassword!").Login();
+        LoginPage.LoginAs(USER_W_BAD_LOGIN.getUsername()).WithPassword(USER_W_BAD_LOGIN.getPassword()).Login();
 
         try {
         assertThat("Received error message from bad password",
