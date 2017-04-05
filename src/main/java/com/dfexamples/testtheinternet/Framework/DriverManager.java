@@ -39,19 +39,27 @@ public class DriverManager {
     private static void setUpDriverInstance(String browsername) {
         switch (browsername) {
             case "Chrome":
-                setUpDriverInstanceUsingChrome(usingPathForThirdPartyBrowserDriverByOS(browsername));
+                setUpDriverInstanceUsingChrome(
+                        determineExtensionForBrowserDriver(
+                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
                 break;
 
             case "Firefox":
-                setUpDriverInstanceUsingFirefox(usingPathForThirdPartyBrowserDriverByOS(browsername));
+                setUpDriverInstanceUsingFirefox(
+                        determineExtensionForBrowserDriver(
+                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
                 break;
 
             case "Marionette":
-                setUpDriverInstanceUsingMarionette(usingPathForThirdPartyBrowserDriverByOS(browsername));
+                setUpDriverInstanceUsingMarionette(
+                        determineExtensionForBrowserDriver(
+                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
                 break;
 
             default:
-                setUpDriverInstanceUsingChrome(usingPathForThirdPartyBrowserDriverByOS(browsername));
+                setUpDriverInstanceUsingChrome(
+                        determineExtensionForBrowserDriver(
+                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
                 break;
         }
     }
@@ -75,23 +83,23 @@ public class DriverManager {
 
     private static String usingPathForThirdPartyBrowserDriverByOS(String browsername) {
 
-        String path;
-
         switch (browsername) {
             case "Chrome":
-                path = DRIVER_PATH_CHROME.getPath();
+                return DRIVER_PATH_CHROME.getPath();
 
             case "Firefox":
-                path = DRIVER_PATH_GECKO.getPath();
+                return DRIVER_PATH_GECKO.getPath();
 
             case "Marionette":
-                path = DRIVER_PATH_GECKO.getPath();
+                return DRIVER_PATH_GECKO.getPath();
 
             default:
-                path = DRIVER_PATH_CHROME.getPath();
+                return DRIVER_PATH_CHROME.getPath();
         }
+    }
 
-        return (OperatingSystem.equalsIgnoreCase("mac os x") ? path : path + ".exe");
+    private static String determineExtensionForBrowserDriver(String driverPath) {
+        return (OperatingSystem.equalsIgnoreCase("mac os x") ? driverPath : driverPath + ".exe");
     }
 
     public static void Close() {

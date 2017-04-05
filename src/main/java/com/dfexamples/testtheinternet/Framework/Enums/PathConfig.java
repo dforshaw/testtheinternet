@@ -5,7 +5,7 @@ public enum PathConfig {
     VENDOR_PATH("/vendors"),
     DRIVER_PATH_GECKO("/geckodriver/geckodriver"),
     DRIVER_PATH_CHROME("/chromedriver/chromedriver"),
-    PROJ_LOCATION_WORK("/Ideaproject"),
+    PROJ_LOCATION_WORK("/Ideaprojects"),
     PROJ_LOCATION_HOME("/Code");
 
     String path;
