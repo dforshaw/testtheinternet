@@ -39,63 +39,48 @@ public class DriverManager {
     private static void setUpDriverInstance(String browsername) {
         switch (browsername) {
             case "Chrome":
-                setUpDriverInstanceUsingChrome(
-                        determineExtensionForBrowserDriver(
-                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
+                setUpDriverInstanceUsingChrome();
                 break;
 
             case "Firefox":
-                setUpDriverInstanceUsingFirefox(
-                        determineExtensionForBrowserDriver(
-                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
+                setUpDriverInstanceUsingFirefox();
                 break;
 
             case "Marionette":
-                setUpDriverInstanceUsingMarionette(
-                        determineExtensionForBrowserDriver(
-                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
+                setUpDriverInstanceUsingMarionette();
                 break;
 
             default:
-                setUpDriverInstanceUsingChrome(
-                        determineExtensionForBrowserDriver(
-                                usingPathForThirdPartyBrowserDriverByOS(browsername)));
+                setUpDriverInstanceUsingChrome();
                 break;
         }
     }
 
-    private static void setUpDriverInstanceUsingChrome(String driverPath) {
-        System.setProperty("webdriver.chrome.driver", BrowserDriverVendorDir + driverPath);
+    private static void setUpDriverInstanceUsingChrome() {
+        String path = BrowserDriverVendorDir + DRIVER_PATH_CHROME.getPath();
+        path = determineExtensionForBrowserDriver(path);
+
+        System.setProperty("webdriver.chrome.driver", path);
         DriverInstance = new ChromeDriver();
     }
 
-    private static void setUpDriverInstanceUsingFirefox(String driverPath) {
-        System.setProperty("webdriver.gecko.driver", BrowserDriverVendorDir + driverPath);
+    private static void setUpDriverInstanceUsingFirefox() {
+        String path = BrowserDriverVendorDir + DRIVER_PATH_GECKO.getPath();
+        path = determineExtensionForBrowserDriver(path);
+
+        System.setProperty("webdriver.gecko.driver", path);
         DriverInstance = new FirefoxDriver();
     }
 
-    private static void setUpDriverInstanceUsingMarionette(String driverPath) {
+    private static void setUpDriverInstanceUsingMarionette() {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
-        System.setProperty("webdriver.gecko.driver", BrowserDriverVendorDir + driverPath);
+
+        String path = BrowserDriverVendorDir + DRIVER_PATH_GECKO.getPath();
+        path = determineExtensionForBrowserDriver(path);
+
+        System.setProperty("webdriver.gecko.driver", path);
         DriverInstance = new FirefoxDriver(capabilities);
-    }
-
-    private static String usingPathForThirdPartyBrowserDriverByOS(String browsername) {
-
-        switch (browsername) {
-            case "Chrome":
-                return DRIVER_PATH_CHROME.getPath();
-
-            case "Firefox":
-                return DRIVER_PATH_GECKO.getPath();
-
-            case "Marionette":
-                return DRIVER_PATH_GECKO.getPath();
-
-            default:
-                return DRIVER_PATH_CHROME.getPath();
-        }
     }
 
     private static String determineExtensionForBrowserDriver(String driverPath) {
