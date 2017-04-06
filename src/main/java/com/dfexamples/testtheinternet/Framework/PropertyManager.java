@@ -32,7 +32,7 @@ public class PropertyManager {
         os = System.getProperty("os.name").toUpperCase();
 
         try {
-            properties.load(new FileInputStream(PROPERTIES_PATH + "localhost.properties"));
+            properties.load(new FileInputStream(PROPERTIES_PATH.getPath() + "localhost.properties"));
             properties.setProperty("SelectedHost", host);
             properties.setProperty("SelectedBrowser", browser);
             properties.setProperty("operating_system", os);
