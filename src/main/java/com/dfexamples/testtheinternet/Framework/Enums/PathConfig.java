@@ -7,7 +7,8 @@ public enum PathConfig {
     DRIVER_PATH_GECKO("/geckodriver/geckodriver"),
     DRIVER_PATH_CHROME("/chromedriver/chromedriver"),
     PROJ_LOCATION_WORK("/Ideaprojects"),
-    PROJ_LOCATION_HOME("/Code");
+    PROJ_LOCATION_HOME("/Code"),
+    PROPERTIES_PATH("src/main/java/com/dfexamples/testtheinternet/Framework/Properties/");
 
     String path;
 

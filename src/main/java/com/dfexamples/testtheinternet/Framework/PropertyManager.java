@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Properties;
 
+import static com.dfexamples.testtheinternet.Framework.Enums.Browser.BROWSER_CHROME;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROPERTIES_PATH;
+
 public class PropertyManager {
 
     private static Properties properties = new Properties();
     private static final String DEFAULT_HOST = "localhost";
-    private static final String DEFAULT_BROWSER = PropertyManager.BROWSER_CHROME;
-    private static final String BROWSER_CHROME = "Chrome";
-    private static final String BROWSER_MARIONETTE = "Marionette";
-    private static final String BROWSER_FIREFOX = "Firefox";
+    private static final String DEFAULT_BROWSER = BROWSER_CHROME.getBrowser();
 
     public static String getProperty(String key) {
         if (properties.isEmpty()) {
@@ -32,8 +32,7 @@ public class PropertyManager {
         os = System.getProperty("os.name").toUpperCase();
 
         try {
-            properties.load(new FileInputStream(
-                    "src/main/java/com/dfexamples/testtheinternet/Framework/Properties/localhost.properties"));
+            properties.load(new FileInputStream(PROPERTIES_PATH + "localhost.properties"));
             properties.setProperty("SelectedHost", host);
             properties.setProperty("SelectedBrowser", browser);
             properties.setProperty("operating_system", os);
