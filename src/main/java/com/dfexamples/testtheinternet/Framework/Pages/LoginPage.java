@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 import static com.dfexamples.testtheinternet.Framework.DriverManager.BaseAddress;
+import static com.dfexamples.testtheinternet.Framework.Enums.TestURL.LOGIN_PAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoginPage {
@@ -14,7 +15,7 @@ public class LoginPage {
 
     public static void GoTo() {
 
-        DriverManager.DriverInstance.navigate().to(BaseAddress + "/login");
+        DriverManager.DriverInstance.navigate().to(BaseAddress + LOGIN_PAGE.getUrl());
         assertThat(DriverManager.DriverInstance.findElement(usernameSelector).isDisplayed());
     }
 
