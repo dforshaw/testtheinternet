@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_CHROME;
 import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_GECKO;
 import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROJ_LOCATION_HOME;
-import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.VENDOR_PATH;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.VENDOR_PATH_LOCAL;
 
 public class DriverManager {
 
@@ -23,7 +23,8 @@ public class DriverManager {
     public static String UserHomeDir = System.getProperty("user.home");
     public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_HOME.getPath() + "/testtheinternet";
 //    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_WORK.getPath() + "/testtheinternet";
-    public static String BrowserDriverVendorDir = ProjHomeDir + VENDOR_PATH.getPath();
+//    public static String BrowserDriverVendorDir = ProjHomeDir + VENDOR_PATH.getPath();
+    public static String BrowserDriverVendorDir = ProjHomeDir + "/.." + VENDOR_PATH_LOCAL.getPath();
 
     public static void Initialize() {
         String browsername = PropertyManager.getProperty("SelectedBrowser");
