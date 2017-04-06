@@ -19,10 +19,11 @@ public class DriverManager {
 
     public static WebDriver DriverInstance;
     public static String BaseAddress = PropertyManager.getProperty("base_address");
+    public static String RepoName = PropertyManager.getProperty("repo_name");
     public static String OperatingSystem = PropertyManager.getProperty("operating_system");
     public static String UserHomeDir = System.getProperty("user.home");
-    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_HOME.getPath() + "/testtheinternet";
-//    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_WORK.getPath() + "/testtheinternet";
+    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_HOME.getPath() + RepoName;
+//    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_WORK.getPath() + RepoName;
 //    public static String BrowserDriverVendorDir = ProjHomeDir + VENDOR_PATH.getPath();
     public static String BrowserDriverVendorDir = ProjHomeDir + "/.." + VENDOR_PATH_LOCAL.getPath();
 
