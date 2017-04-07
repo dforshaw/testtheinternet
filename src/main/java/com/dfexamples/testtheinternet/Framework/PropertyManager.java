@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.Properties;
 
 import static com.dfexamples.testtheinternet.Framework.Enums.Browser.BROWSER_CHROME;
-import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROPERTIES_PATH;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROJECT_PROPERTIES_PATH;
 
 public class PropertyManager {
 
@@ -32,7 +32,7 @@ public class PropertyManager {
         os = System.getProperty("os.name").toUpperCase();
 
         try {
-            properties.load(new FileInputStream(PROPERTIES_PATH.getPath() + "localhost.properties"));
+            properties.load(new FileInputStream(PROJECT_PROPERTIES_PATH.getPath() + "localhost.properties"));
             properties.setProperty("SelectedHost", host);
             properties.setProperty("SelectedBrowser", browser);
             properties.setProperty("operating_system", os);

@@ -2,13 +2,12 @@ package com.dfexamples.testtheinternet.Framework.Enums;
 
 public enum PathConfig {
 
-    VENDOR_PATH("vendors"),
-    VENDOR_PATH_LOCAL("/_webdriver_clients"),
-    DRIVER_PATH_GECKO("/geckodriver/geckodriver"),
-    DRIVER_PATH_CHROME("/chromedriver/chromedriver"),
+    PROJECT_PROPERTIES_PATH("src/main/java/com/dfexamples/testtheinternet/Framework/Properties/"),
     PROJ_LOCATION_WORK("/Ideaprojects/"),
     PROJ_LOCATION_HOME("/Code/"),
-    PROPERTIES_PATH("src/main/java/com/dfexamples/testtheinternet/Framework/Properties/");
+    WEBDRIVER_CLIENTS("/_webdriver_clients"),
+    PATH_TO_CHROME_DRIVER("/chromedriver/chromedriver"),
+    PATH_TO_GECKO_DRIVER("/geckodriver/geckodriver");
 
     String path;
 

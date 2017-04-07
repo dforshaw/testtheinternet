@@ -10,10 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_CHROME;
-import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.DRIVER_PATH_GECKO;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PATH_TO_CHROME_DRIVER;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PATH_TO_GECKO_DRIVER;
 import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.PROJ_LOCATION_HOME;
-import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.VENDOR_PATH_LOCAL;
+import static com.dfexamples.testtheinternet.Framework.Enums.PathConfig.WEBDRIVER_CLIENTS;
 
 public class DriverManager {
 
@@ -24,8 +24,7 @@ public class DriverManager {
     public static String UserHomeDir = System.getProperty("user.home");
     public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_HOME.getPath() + RepoName;
 //    public static String ProjHomeDir = UserHomeDir + PROJ_LOCATION_WORK.getPath() + RepoName;
-//    public static String BrowserDriverVendorDir = ProjHomeDir + VENDOR_PATH.getPath();
-    public static String BrowserDriverVendorDir = ProjHomeDir + "/.." + VENDOR_PATH_LOCAL.getPath();
+    public static String BrowserDriverVendorDir = ProjHomeDir + "/.." + WEBDRIVER_CLIENTS.getPath();
 
     public static void Initialize() {
         String browsername = PropertyManager.getProperty("SelectedBrowser");
@@ -59,7 +58,7 @@ public class DriverManager {
     }
 
     private static void setUpDriverInstanceUsingChrome() {
-        String path = BrowserDriverVendorDir + DRIVER_PATH_CHROME.getPath();
+        String path = BrowserDriverVendorDir + PATH_TO_CHROME_DRIVER.getPath();
         path = determineExtensionForBrowserDriver(path);
 
         System.setProperty("webdriver.chrome.driver", path);
@@ -67,7 +66,7 @@ public class DriverManager {
     }
 
     private static void setUpDriverInstanceUsingFirefox() {
-        String path = BrowserDriverVendorDir + DRIVER_PATH_GECKO.getPath();
+        String path = BrowserDriverVendorDir + PATH_TO_GECKO_DRIVER.getPath();
         path = determineExtensionForBrowserDriver(path);
 
         System.setProperty("webdriver.gecko.driver", path);
@@ -78,7 +77,7 @@ public class DriverManager {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
 
-        String path = BrowserDriverVendorDir + DRIVER_PATH_GECKO.getPath();
+        String path = BrowserDriverVendorDir + PATH_TO_GECKO_DRIVER.getPath();
         path = determineExtensionForBrowserDriver(path);
 
         System.setProperty("webdriver.gecko.driver", path);
